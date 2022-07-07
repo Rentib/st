@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "hack:pixelsize=14:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -94,32 +94,30 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
-unsigned int tabspaces = 8;
+unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.8;
+float alpha = 0.85;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
-
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+  "#181B28",
+  "#C6262E",
+  "#68B723",
+  "#F9C440",
+  "#0D52BF",
+  "#A56DE2",
+  "#28BCA3",
+  "#C3C7D1",
+  "#12151F",
+  "#FF8C82",
+  "#9BDB4D",
+  "#FFE16B",
+  "#64BAFF",
+  "#C50ED2",
+  "#89FFDD",
+  "#FEFEFE",
 
 	[255] = 0,
 
@@ -128,6 +126,10 @@ static const char *colorname[] = {
 	"#555555",
 	"gray90", /* default foreground colour */
 	"black", /* default background colour */
+
+  "#181B28", /* 260 - background color */
+  "#C3C7D1", /* 261 - foreground color */
+  "#FEFEFE", /* 262 - cursor color */
 };
 
 
@@ -135,9 +137,9 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 258;
-unsigned int defaultbg = 259;
-unsigned int defaultcs = 256;
+unsigned int defaultfg = 261;
+unsigned int defaultbg = 260;
+unsigned int defaultcs = 262;
 static unsigned int defaultrcs = 257;
 
 /*
@@ -182,6 +184,8 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
+  { XK_ANY_MOD,           Button4, kscrollup,      {.i = 1}, 0 },
+  { XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1}, 0 },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -207,7 +211,19 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
+
+  { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+  { ShiftMask,            XK_Page_Down,   kscrollup,      {.i = -1} },
+  { MODKEY,               XK_j,           kscrolldown,    {.i = +1} },
+  { MODKEY,               XK_k,           kscrollup,      {.i = +1} },
+
+  { ControlMask,          XK_0,           zoomreset,      {.f =  0} },
+  { ControlMask,          XK_minus,       zoom,           {.f = -1} },
+  { ControlMask,          XK_equal,       zoom,           {.f = +1} },
+  { MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
+  { MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
+
+	{ Mod4Mask|ShiftMask,   XK_Return,      newterm,        {.i =  0} },
 };
 
 /*
