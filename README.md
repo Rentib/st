@@ -7,6 +7,13 @@ Requirements
 ------------
 In order to build st you need the Xlib header files.
 
+Patches
+-------
+scrollback  - allows for scrolling (with mouse or with keyboard)
+anysize     - allows st to perfectly fill in empty space
+alpha       - for people who like transparency
+newterm     - spawn terminal with the same CWD (current working directory) as the original instance
+charoffsets - fixes rendering for some fonts
 
 Installation
 ------------
