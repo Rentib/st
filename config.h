@@ -101,6 +101,7 @@ float alpha = 0.85;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
+#ifdef SWEET_DARK
 	/* 8 normal colors */
   "#181B28",
   "#C6262E",
@@ -110,6 +111,7 @@ static const char *colorname[] = {
   "#A56DE2",
   "#28BCA3",
   "#C3C7D1",
+  /* 8 bright colors */
   "#12151F",
   "#FF8C82",
   "#9BDB4D",
@@ -118,6 +120,45 @@ static const char *colorname[] = {
   "#C50ED2",
   "#89FFDD",
   "#FEFEFE",
+#elif GRUVBOX
+  /* 8 normal colors */
+  "#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
+  "#ea6962", /* red     */
+  "#a9b665", /* green   */
+  "#d8a657", /* yellow  */
+  "#7daea3", /* blue    */
+  "#d3869b", /* magenta */
+  "#89b482", /* cyan    */
+  "#d4be98", /* white   */
+  /* 8 bright colors */
+  "#928374", /* black   */
+  "#ef938e", /* red     */
+  "#bbc585", /* green   */
+  "#e1bb7e", /* yellow  */
+  "#9dc2ba", /* blue    */
+  "#e1acbb", /* magenta */
+  "#a7c7a2", /* cyan    */
+  "#e2d3ba", /* white   */
+#else
+  /* 8 normal colors */
+  "black",
+  "red3",
+  "green3",
+  "yellow3",
+  "blue2",
+  "magenta3",
+  "cyan3",
+  "gray90",
+  /* 8 bright colors */
+  "gray50",
+  "red",
+  "green",
+  "yellow",
+  "#5c5cff",
+  "magenta",
+  "cyan",
+  "white",
+#endif
 
 	[255] = 0,
 
@@ -126,10 +167,6 @@ static const char *colorname[] = {
 	"#555555",
 	"gray90", /* default foreground colour */
 	"black", /* default background colour */
-
-  "#181B28", /* 260 - background color */
-  "#C3C7D1", /* 261 - foreground color */
-  "#FEFEFE", /* 262 - cursor color */
 };
 
 
@@ -137,9 +174,9 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 261;
-unsigned int defaultbg = 260;
-unsigned int defaultcs = 262;
+unsigned int defaultfg = 7;
+unsigned int defaultbg = 0;
+unsigned int defaultcs = 15;
 static unsigned int defaultrcs = 257;
 
 /*
