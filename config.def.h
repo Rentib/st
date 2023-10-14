@@ -218,7 +218,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_k,           kscrollup,      {.i = +1} },
 	{ MODKEY,               XK_j,           kscrolldown,    {.i = +1} },
 
-	{ ControlMask,          XK_0,           zoomreset,      {.f = 0} },
+	{ ControlMask,          XK_0,           zoomreset,      {.f =  0} },
 	{ ControlMask,          XK_equal,       zoom,           {.f = +1} },
 	{ ControlMask,          XK_minus,       zoom,           {.f = -1} },
 	{ MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
