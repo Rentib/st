@@ -2222,12 +2222,20 @@ xrdb_load(void)
 void
 reload(int sig)
 {
+	float old_alpha = alpha;
+	double old_usedfontsize = usedfontsize;
+
 	xrdb_load();
 
 	/* colors, fonts */
 	xloadcols();
 	xunloadfonts();
 	xloadfonts(font, 0);
+
+	/* restore previous alpha and fontsize */
+	alpha = old_alpha;
+	usedfontsize = old_usedfontsize;
+	zoomabs(&(Arg){.f = usedfontsize });
 
 	/* pretend the window just got resized */
 	cresize(win.w, win.h);
