@@ -53,6 +53,7 @@ typedef struct {
 #define XK_SWITCH_MOD (1<<13|1<<14)
 
 /* function definitions used in config.h */
+static void changealpha(const Arg *);
 static void clipcopy(const Arg *);
 static void clippaste(const Arg *);
 static void numlock(const Arg *);
@@ -260,6 +261,17 @@ static char *opt_name  = NULL;
 static char *opt_title = NULL;
 
 static uint buttons; /* bit field of pressed buttons */
+
+void
+changealpha(const Arg *arg)
+{
+	float a = alpha + arg->f / 100;
+	if (a < 0 || a > 1)
+		return;
+	alpha = a;
+	xloadcols();
+	redraw();
+}
 
 void
 clipcopy(const Arg *dummy)
@@ -2202,6 +2214,7 @@ xrdb_load(void)
 
 		XRESOURCE_LOAD_FLOAT("cwscale", cwscale);
 		XRESOURCE_LOAD_FLOAT("chscale", chscale);
+		XRESOURCE_LOAD_FLOAT("alpha", alpha);
 	}
 	XFlush(dpy);
 }

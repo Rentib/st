@@ -235,6 +235,8 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_minus,       zoom,           {.f = -1} },
 	{ MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
 	{ MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
+	{ MODKEY|ShiftMask,     XK_L,           changealpha,    {.f = +5} },
+	{ MODKEY|ShiftMask,     XK_H,           changealpha,    {.f = -5} },
 
 	{ Mod4Mask|ShiftMask,   XK_Return,      newterm,        {.i =  0} },
 };
